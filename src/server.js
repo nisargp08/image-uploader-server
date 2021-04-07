@@ -1,6 +1,9 @@
+// Library import
 import express from "express";
 import morgan from "morgan";
 import { json, urlencoded } from "body-parser";
+// Route import
+import fileUploadRouter from './resources/file_upload/file_upload.router';
 
 const app = express();
 
@@ -14,9 +17,11 @@ app.use(urlencoded({ extended: true }));
 
 // Routes
 app.get('/',(req,res) => {
-    res.send("Welcome to image uploader");
     console.log("welcome to image uiploader");
+    res.send("Welcome to image uploader");
 })
+app.use('/api/file_upload/',fileUploadRouter);
+
 export const startServer = () => {
   const port = process.env.PORT || 3000;
   app.listen(port, () => {
