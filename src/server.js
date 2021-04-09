@@ -21,7 +21,23 @@ app.use(express.static(config.uploadDirectory));
 
 // Routes
 app.use("/api/file_upload/", fileUploadRouter);
-
+// When main server url is requested display available paths
+app.get("*", (req, res) => {
+  const availableRoutes = [
+    {
+      // To get a single file
+      methods: "GET",
+      route: "/api/file_upload/:id",
+    },
+    {
+      // To upload a image/'s
+      method: "POST",
+      route: "api/file_upload",
+    },
+  ];
+  res.header("Content-Type",'application/json');
+  res.send(JSON.stringify(availableRoutes, null, 4));
+});
 export const startServer = async () => {
   try {
     await config.connectDB();

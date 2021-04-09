@@ -4,12 +4,15 @@ import path from 'path';
 import mongoose from "mongoose";
 require("dotenv").config();
 
-// Mongodb config
+// Mongodb and host url config
 let db_url;
+export let host_url;
 if(process.env.NODE_ENV === "production"){
     db_url = process.env.PROD_DB_URL;
+    host_url = `https://np-image-uploader.herokuapp.com/api/file_upload`;
 } else {
     db_url = process.env.DEV_DB_URL;
+    host_url = `http://localhost:3000/api/file_upload`;
 }
 
 // Mongo db server connect
@@ -32,7 +35,7 @@ export const storage = multer.diskStorage({
 // Init upload
 export const upload = multer({
     storage : storage
-}).any('fileUpload');
+}).array('fileUpload',10);
 
 // Status code for Http requestes
 export const code = {

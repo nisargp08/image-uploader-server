@@ -3,7 +3,6 @@ import { Image } from "./file_upload.model";
 import path from "path";
 
 // Controller function to upload a file
-const hostURL = "http://localhost:3000/api/file_upload";
 export const uploadFile = (req, res) => {
   // Use multer upload
   config.upload(req, res, (err) => {
@@ -29,7 +28,7 @@ export const uploadFile = (req, res) => {
         .then((docs) => {
           // Return an array containing image URL's of all the uploaded images
           const imageURLs = docs.map((doc) => {
-            return { url: `${hostURL}/${doc._id}`, name: doc.originalName };
+            return { url: `${config.host_url}/${doc._id}`, name: doc.originalName };
           });
           console.log(imageURLs);
           res.status(config.code.created).json(imageURLs);
