@@ -20,7 +20,7 @@ app.use(morgan("dev"));
 app.use(express.static(config.uploadDirectory));
 
 // Routes
-app.use("/api/file_upload/", fileUploadRouter);
+app.use("/api/file_upload", fileUploadRouter);
 // When main server url is requested display available paths
 app.get("*", (req, res) => {
   const availableRoutes = [
