@@ -10,7 +10,7 @@ let db_url;
 export let host_url;
 if (process.env.NODE_ENV === "production") {
   db_url = process.env.PROD_DB_URL;
-  host_url = `https://np-image-uploader.herokuapp.com/api/file_upload`;
+  host_url = `https://np-image-uploader.up.railway.app/api/file_upload`;
 } else {
   db_url = process.env.DEV_DB_URL;
   host_url = `http://localhost:3000/api/file_upload`;
